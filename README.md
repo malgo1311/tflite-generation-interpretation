@@ -1,3 +1,11 @@
+# Tflite Interpretation
+
+1. tflite-intepretation.py - This script can be used to verify if the tflite generated behaves in the way you are expecting in your python environment. This script just generated the bounding box co-ordinates, you need to write your own function on what to with these values
+
+2. interpret_using_tflite_runtime.py - I had written this script to predict on a raspberry-pi, and tflite_runtime is a little lighter. We do not need to install tensorflow on our rpi, instead we can just use tflite_runtime library
+
+If you have not generated a tflite file yet and have a Tensorflow Graphdef file ready, and read through the following steps to generate it.
+
 # Tflite generation from Tensorflow Graphdef
 
 Tflite files are compact version of our frozen graphs designed to run efficienty in limited resource setting like a smartphone or on an edge devices like raspberry pi. These will work best if used with Mobilenet checkpoints, but if you want better accuracy and can work with a bit slower prediction model like Densenet then feel free to use that as your backbone.
@@ -11,6 +19,8 @@ Before running the following commands add '/tensorflow/models/research' and '/te
 Last I ran these commands with Tensorflow 1.14 and Python 3.7
 
 ## Tflite generation for Object Detection Checkpoints
+
+Instead of generating frozen_inference_graph.pb, we use export_tflite_ssd_graph.py script to generate tflite graph which will be further used to generate our tflite file 
 
 python research/object_detection/export_tflite_ssd_graph.py \
   --pipeline_config_path /zeleling/ssdlite_mn_v2/pipeline.config \
@@ -63,9 +73,3 @@ Most of the stuff mentioned above is true for these checkpoints as well. You jus
 --output_arrays=MobilenetV1/Predictions/Reshape_1
 
 'output_arrays' may change according to the model you are using.
-
-# Tflite Interpretation
-
-1. tflite-intepretation.py - This script can be used to verify if the tflite generated behaves in the way you are expecting in your python environment
-
-2. interpret_using_tflite_runtime.py - I had written this script to predict on a raspberry-pi, and tflite_runtime is a little lighter. We do not need to install tensorflow on our rpi, instead we can just use tflite_runtime library
