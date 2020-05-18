@@ -4,7 +4,7 @@
 
 2. interpret_using_tflite_runtime.py - I had written this script to predict on a raspberry-pi, and tflite_runtime is a little lighter. We do not need to install tensorflow on our rpi, instead we can just use tflite_runtime library
 
-If you have not generated a tflite file yet and have a Tensorflow Graphdef file ready, and read through the following steps to generate it.
+If you have not generated a tflite file yet and have a Tensorflow Graphdef file ready, then read through the following steps to generate it.
 
 # Tflite generation from Tensorflow Graphdef
 
