@@ -1,4 +1,4 @@
-# TF lite generation from Tensorflow Graphdef
+# Tflite generation from Tensorflow Graphdef
 
 Tflite files are compact version of our frozen graphs designed to run efficienty in limited resource setting like a smartphone or on an edge devices like raspberry pi. These will work best if used with Mobilenet checkpoints, but if you want better accuracy and can work with a bit slower prediction model like Densenet then feel free to use that as your backbone.
 
@@ -63,3 +63,9 @@ Most of the stuff mentioned above is true for these checkpoints as well. You jus
 --output_arrays=MobilenetV1/Predictions/Reshape_1
 
 'output_arrays' may change according to the model you are using.
+
+# Tflite Interpretation
+
+1. tflite-intepretation.py - This script can be used to verify if the tflite generated behaves in the way you are expecting in your python environment
+
+2. interpret_using_tflite_runtime.py - I had written this script to predict on a raspberry-pi, and tflite_runtime is a little lighter. We do not need to install tensorflow on our rpi, instead we can just use tflite_runtime library
