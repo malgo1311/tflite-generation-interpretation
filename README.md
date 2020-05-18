@@ -18,7 +18,7 @@ python research/object_detection/export_tflite_ssd_graph.py \
   --output_directory /zeleling/ssdlite_mn_v2/train/tflite \
   --add_postprocessing_op=true
 
-For normally trained models you should set 'inference_type=FLOAT' and run the following command by using your custom 'input_shapes'
+#### For normally trained models you should set 'inference_type=FLOAT' and run the following command by using your custom 'input_shapes'
 
 tflite_convert \
   --graph_def_file=/zeleling/ssdlite_mn_v2/train/tflite/tflite_graph.pb \
@@ -33,7 +33,7 @@ tflite_convert \
   --std_dev=127 \
   --mean=128 \
   
-If quantized training is performed, then you can set 'inference_type=QUANTIZED_UINT8'. These files are faster than float inference tflites.
+#### If quantized training is performed, then you can set 'inference_type=QUANTIZED_UINT8'. These files are faster than float inference tflites.
 
 tflite_convert \
   --graph_def_file=/zeleling/ssdlite_mn_v2/train/tflite/tflite_graph.pb \
@@ -51,7 +51,15 @@ tflite_convert \
   --default_ranges_max=6 \
   --change_concat_input_ranges=true
   
-Regarding default_ranges_min and default_ranges_max: (From https://www.tensorflow.org/lite/convert/cmdline_examples) The example below contains a model using Relu6 activation functions. Therefore, a reasonable guess is that most activation ranges should be contained in [0, 6].
+Regarding default_ranges_min and default_ranges_max: (From https://www.tensorflow.org/lite/convert/cmdline_examples) The example contains a model using Relu6 activation functions. Therefore, a reasonable guess is that most activation ranges should be contained in [0, 6].
 
 You can learn more about the arguments that we are passing in the command here - https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/python/tflite_convert.py
   
+## Tflite generation for Image Classification Checkpoints
+
+Most of the stuff mentioned above is true for these checkpoints as well. You just need to replace the following.
+
+--input_arrays=input \
+--output_arrays=MobilenetV1/Predictions/Reshape_1
+
+'output_arrays' may change according to the model you are using.
